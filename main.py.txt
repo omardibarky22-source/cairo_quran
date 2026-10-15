@@ -1,0 +1,35 @@
+import asyncio
+from pyrogram import Client
+from pytgcalls import PyTgCalls
+from pytgcalls.types import AudioPiped
+
+API_ID = 37311285
+API_HASH = 1070147f0cafb2e11f04c1110e05497b
+BOT_TOKEN = 8887947568:AAEehGpPU2wKQ_9gUvN_ToaPWsjjAJqOgz4
+CHAT_USERNAME = @MenbarAltelawa
+RADIO_URL = https://service.webvideocore.net/CL1olYogIrDWvwqiIKK7eCxOS4PStqG9DuEjAr2ZjZQtvS3d4y9r0cvRhvS17SGN/a_7a4vuubc6mo8.m3u8
+
+app = Client(
+    "radio_bot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
+)
+
+call_py = PyTgCalls(app)
+
+async def main():
+    await app.start()
+    await call_py.start()
+    print("تم الاتصال بنجاح، جاري بدء البث...")
+
+    await call_py.join_group_call(
+        CHAT_USERNAME,
+        AudioPiped(RADIO_URL),
+    )
+    print("البث يعمل الآن على الهواء!")
+
+    await asyncio.Future()
+
+if __name__ == "__main__":
+    asyncio.get_event_loop().run_until_complete(main())
